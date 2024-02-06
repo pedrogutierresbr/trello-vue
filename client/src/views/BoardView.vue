@@ -2,45 +2,20 @@
 	import axios from "axios";
 	import { reactive, onMounted, computed } from "vue";
 
-	let data: any = reactive({});
-
-	let columnName = "";
-	let cardTitle = "";
-
-	function addColumn(columnName: string) {
-		data.board.columns.push({ name: columnName, estimative: 1, cards: [] });
-	}
-
-	function addCard(column: any, cardTitle: string) {
-		column.cards.push({ title: cardTitle, estimative: 3 });
-		column.estimative += 3;
-	}
-
-	function increaseEstimative(card: any) {
-		card.estimative++;
-	}
-
-	const boardEstimative = computed(() => {
-		return data.board.columns.reduce((total: number, column: any) => {
-			total += column.cards.reduce((total: number, card: any) => {
-				total += card.estimative;
-				return total;
-			}, 0);
-			return total;
-		}, 0);
-	});
 
 	onMounted(async () => {
 		const response = await axios({
 			url: "http://localhost:3000/boards/1",
 			method: "get",
 		});
-		data.board = response.data;
+		console.log(response.data);
+		
 	});
 </script>
 
 <template>
-	<div v-if="data.board">
+
+	<!-- <div v-if="data.board">
 		<h3>{{ data.board.name }} {{ boardEstimative }}</h3>
 		<div class="columns">
 			<div class="column" v-for="(column, index) in data.board.columns" :key="index">
@@ -60,7 +35,8 @@
 				<button @click="addColumn(columnName)">Add</button>
 			</div>
 		</div>
-	</div>
+	</div> -->
+
 </template>
 
 <style scoped>
