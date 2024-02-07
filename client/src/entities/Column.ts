@@ -10,4 +10,11 @@ export default class Column {
     addCard (card: Card){
         this.cards.push(card);
     }
+
+    getEstimative() {
+        return this.cards.reduce((total: number, card: any) => {
+            total += card.estimative;
+            return total;
+        }, 0);
+    }
 }

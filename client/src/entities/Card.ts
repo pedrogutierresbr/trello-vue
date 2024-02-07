@@ -1,6 +1,7 @@
 export default class Card {
+	constructor(readonly title: string, public estimative: number) {}
 
-    constructor(readonly title: string, readonly estimative: number){
-        
-    }
+	increaseEstimative() {
+		this.estimative++;
+	}
 }
