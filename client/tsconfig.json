@@ -7,6 +7,7 @@
     "skipLibCheck": true,
     "allowJs": true,
     "types": ["vitest/globals"],
+    "noImplicitAny": false,
 
     /* Bundler mode */
     "moduleResolution": "bundler",

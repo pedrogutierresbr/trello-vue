@@ -4,7 +4,7 @@ import BoardService from "../services/BoardService";
 import BoardViewVue from "../views/BoardView.vue";
 
 function sleep(ms: number) {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve(true);
 		}, ms);
@@ -13,7 +13,7 @@ function sleep(ms: number) {
 
 test("Deve testar o board view", async function () {
 	const boardService: BoardService = {
-	    async getBoard(idBoard: number) {
+	    async getBoard() {
 	        const board = new Board("Projeto 1");
 	        board.addColumn("Todo", true);
 	        board.addColumn("Doing", true);
