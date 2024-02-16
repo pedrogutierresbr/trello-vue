@@ -19,7 +19,7 @@ export default class Board {
 	}
 
 	increaseEstimative(card: Card) {
-		card.increaseEstimative;
+		card.increaseEstimative();
 	}
 
 	getEstimative() {

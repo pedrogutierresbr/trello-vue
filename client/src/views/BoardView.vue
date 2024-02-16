@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import { inject, onMounted, reactive } from "vue";
-	import Board from "../entities/Board";
-	import BoardService from "../services/BoardService";
+	import Board from "../entities/Board.js";
+	import BoardService from "../services/BoardService.js";
 	import BoardComponent from "../components/BoardComponent.vue";
 
 	const data: { board: Board | undefined } = reactive({ board: undefined });
