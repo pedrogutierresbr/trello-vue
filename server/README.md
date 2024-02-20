@@ -5,11 +5,14 @@ Criar uma ferramenta similar ao Trello, que tenha um quadro com colunas e cartõ
 rodar aplicação no main
 // npx nodemon src/main.ts
 
-criar banco
+criar banco (ou restaurar ao estado inicial)
 // psql -d trello -f create.sql
 // pgAdmin
 
 rodar testes
 // npx jest
 
+
+Para rodar em sequência, em série, não em paralelo --> teste fica lento
+// npx jest --runInBand 
 

@@ -1,6 +1,6 @@
 import BoardService from "../../service/BoardService";
 import CardService from "../../service/CardService";
-import ColumnService from "../../service/ClumnsService";
+import ColumnService from "../../service/ColumnsService";
 import Connection from "../database/Connection";
 import Http from "../http/Http";
 import BoardRepositoryDatabase from "../repository/BoardRepositoryDatabase";
@@ -11,8 +11,13 @@ import ColumnRepository from "../../domain/repository/ColumnRepository";
 import CardRepository from "../../domain/repository/CardRepository";
 
 export default class BoardController {
-	constructor(readonly http: Http, readonly connection: Connection, readonly boardRepository: BoardRepository, readonly columnRepository: ColumnRepository, readonly cardRepository:CardRepository) {
-
+	constructor(
+		readonly http: Http,
+		readonly connection: Connection,
+		readonly boardRepository: BoardRepository,
+		readonly columnRepository: ColumnRepository,
+		readonly cardRepository: CardRepository
+	) {
 		http.route("get", "/boards", async function (params: any, body: any) {
 			const boardRepository = new BoardRepositoryDatabase(connection);
 			const boardService = new BoardService(boardRepository, columnRepository, cardRepository);
@@ -32,6 +37,26 @@ export default class BoardController {
 			const columnService = new ColumnService(columnRepository);
 			const columns = await columnService.getColumns(parseInt(params.idBoard));
 			return columns;
+		});
+
+		http.route("get", "/boards/:idBoard/columns/:idColumn", async function (params: any, body: any) {
+			const columnRepository = new ColumnRepositoryDatabase(connection);
+			const columnService = new ColumnService(columnRepository);
+			const column = await columnService.getColumn(parseInt(params.idColumn));
+			return column;
+		});
+
+		http.route("post", "/boards/:idBoard/columns", async function (params: any, body: any) {
+			const columnRepository = new ColumnRepositoryDatabase(connection);
+			const columnService = new ColumnService(columnRepository);
+			const idColumn = await columnService.saveColumn(body);
+			return idColumn;
+		});
+
+		http.route("delete", "/boards/:idBoard/columns/:idColumn", async function (params: any, body: any) {
+			const columnRepository = new ColumnRepositoryDatabase(connection);
+			const columnService = new ColumnService(columnRepository);
+			await columnService.deleteColumn(parseInt(params.idColumn));
 		});
 
 		http.route("get", "/boards/:idBoard/columns/:idColumn/cards", async function (params: any, body: any) {
