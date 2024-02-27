@@ -1,14 +1,12 @@
-import axios from "axios";
 import Board from "../entities/Board";
-import BoardService from "./BoardService";
+import BoardService, { SaveColumnInput } from "./BoardService";
+import HttpClient from "../infra/http/HttpClient";
 
 export default class BoardServiceHttp implements BoardService {
+	constructor(readonly httpClient: HttpClient, readonly baseUrl: string) {}
+
 	async getBoard(idBoard: number): Promise<Board> {
-		const response = await axios({
-			url: `http://localhost:3000/boards/${idBoard}`,
-			method: "get",
-		});
-		const boardData = response.data;
+		const boardData = await this.httpClient.get(`${this.baseUrl}/boards/${idBoard}`);
 		const board = new Board(boardData.name);
 		for (const columnData of boardData.columns) {
 			board.addColumn(columnData.name, columnData.estimative);
@@ -18,5 +16,10 @@ export default class BoardServiceHttp implements BoardService {
 		}
 
 		return board;
+	}
+
+	async saveColumn(column: SaveColumnInput): Promise<number> {
+		const idColumn = await this.httpClient.post(`${this.baseUrl}/boards/${column.idBoard}/columns`, column);
+		return idColumn;
 	}
 }

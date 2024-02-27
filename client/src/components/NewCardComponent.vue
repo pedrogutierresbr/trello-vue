@@ -7,8 +7,8 @@
 
 <template>
 	<div class="new-card">
-		<input type="text" v-model="cardTitle" />
-		<button @click="board?.addCard(column.name, cardTitle, 0)">Add</button>
+		<input class="new-card-input" type="text" v-model="cardTitle" />
+		<button class="new-card-add" @click="board?.addCard(column.name, cardTitle, 0)">Add</button>
 	</div>
 </template>
 

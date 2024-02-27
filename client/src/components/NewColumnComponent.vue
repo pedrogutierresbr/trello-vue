@@ -7,8 +7,8 @@
 
 <template>
 	<div class="column new-column">
-		<input type="text" v-model="columnName" />
-		<button @click="board?.addColumn(columnName, true)">Add</button>
+		<input class="new-column-input" type="text" v-model="columnName" />
+		<button class="new-column-add" @click="board?.addColumn(columnName, true)">Add</button>
 	</div>
 </template>
 
