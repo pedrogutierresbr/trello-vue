@@ -1,7 +1,14 @@
 export default class Card {
-	constructor(readonly title: string, public estimative: number) {}
+	idCard?: number;
 
-	increaseEstimative() {
-		this.estimative++;		
+	constructor (readonly title: string, public estimative: number) {
+	}
+
+	increaseEstimative () {
+		this.estimative++;
+	}
+
+	decreaseEstimative () {
+		this.estimative--;
 	}
 }

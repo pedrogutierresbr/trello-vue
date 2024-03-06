@@ -6,16 +6,19 @@
 </script>
 
 <template>
-	<div class="column new-column">
-		<input class="new-column-input" type="text" v-model="columnName" />
-		<button class="new-column-add" @click="board?.addColumn(columnName, true)">Add</button>
+	<div class="new-column">
+		<input
+			class="new-column-input"
+			type="text"
+			v-model="columnName"
+			@keypress.enter="board?.addColumn(columnName, true)"
+			placeholder="New Column"
+		/>
 	</div>
 </template>
 
 <style scoped>
 	.new-column {
-		background-color: #eee;
-		border: 1px dashed #ccc;
-		display: block;
+		text-align: center;
 	}
 </style>

@@ -7,15 +7,13 @@
 
 <template>
 	<div v-if="board">
-		<h3>
-			{{ board.name }} <span id="estimative"> {{ board.getEstimative() }}</span>
-		</h3>
+		<h3>{{ board.name }} (<span id="estimative">{{ board.getEstimative() }}</span>)</h3>
 		<div class="columns">
-			<div v-for="(column, index) in board.columns" :key="index">
-				<ColumnComponent :board="board" :column="column" />
-				<NewCardComponent :board="board" :column="column" />
+			<div v-for="column in board.columns">
+				<ColumnComponent :board="board" :column="column"></ColumnComponent>
+				<NewCardComponent :board="board" :column="column"></NewCardComponent>
 			</div>
-			<NewColumnComponent :board="board"/>
+			<NewColumnComponent :board="board"></NewColumnComponent>
 		</div>
 	</div>
 </template>
@@ -24,17 +22,5 @@
 	.columns {
 		display: flex;
 		flex-direction: row;
-	}
-
-	.new-column {
-		background-color: #eee;
-		border: 1px dashed #ccc;
-		display: block;
-	}
-
-	.new-card {
-		background-color: #eee;
-		border: 1px dashed #ccc;
-		display: block;
 	}
 </style>

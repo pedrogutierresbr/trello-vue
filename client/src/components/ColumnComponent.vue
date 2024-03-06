@@ -1,14 +1,16 @@
 <script setup lang="ts">
-	import CardComponent from './CardComponent.vue';
+	import CardComponent from "./CardComponent.vue";
 
 	defineProps(["board", "column"]);
 </script>
 
 <template>
-	<div class="column">
+	<div class="column" @dragover="board.moveCard(column)">
 		<h3>{{ column.name }} <span class="estimative">{{ column.getEstimative() }}</span></h3>
-		<div  v-for="(card, index) in column.cards" :key="index">
-			<CardComponent :board="board" :column="column" :card="card"/>
+		<button @click="board.deleteColumn(column.idColumn)">delete</button>
+		<hr/>
+		<div v-for="card in column.cards">
+			<CardComponent :board="board" :column="column" :card="card"></CardComponent>
 		</div>
 	</div>
 </template>
@@ -21,5 +23,6 @@
 		margin-right: 5px;
 		padding: 10px;
 		border: 1px solid #000;
+		min-height: 500px;
 	}
 </style>

@@ -3,10 +3,15 @@
 </script>
 
 <template>
-	<div class="card">
-		<span class="card-title">{{ card.title }}</span> <span class="card-estimative">{{ card.estimative }}</span>
-		<br />
-		<button class="card-increase-estimative" @click="board?.increaseEstimative(card)">+</button><button>-</button>
+	<div :style="{'background-color': card.color }" class="card" draggable="true" @dragstart="board.selectCard(column, card)" @dragend="board.resetCard()" @dragover="board.swap(card)">
+		<div class="card-title">
+			{{ card.idCard }} {{ card.title }} (<span class="card-estimative">{{ card.estimative }}</span>)
+		</div>
+		<div>
+			<button class="card-increase-estimative" @click="board?.increaseEstimative(column, card)">+</button>
+			<button class="card-increase-estimative" @click="board?.decreaseEstimative(column, card)">-</button>
+			<button @click="board.deleteCard(column, card.idCard)">delete</button>
+		</div>
 	</div>
 </template>
 
@@ -18,8 +23,9 @@
 		background-color: #f3e779;
 		border: 1px solid #000;
 		margin-bottom: 10px;
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
+	}
+
+	.card-title {
+		padding: 15px;
 	}
 </style>
