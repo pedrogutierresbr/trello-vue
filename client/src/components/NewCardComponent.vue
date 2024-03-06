@@ -7,7 +7,13 @@
 
 <template>
 	<div class="new-card">
-		<input class="new-card-input" type="text" v-model="cardTitle" @keypress.enter="board?.addCard(column.name, cardTitle, 0)" placeholder="New Card"/>
+		<input
+			class="new-card-input"
+			type="text"
+			v-model="cardTitle"
+			@keypress.enter="board?.addCard(column.name, cardTitle, 0)"
+			placeholder="New Card"
+		/>
 	</div>
 </template>
 

@@ -32,6 +32,10 @@ export default class ColumnRepositoryDatabase implements ColumnRepository {
 		return new Column(columnData.id_board, columnData.id_column, columnData.name, columnData.has_estimative);
 	}
 
+	async update(column: Column): Promise<void> {
+		await this.connection.query("update pedro.column set name = $1 where id_column = $2", [column.name, column.idColumn]);
+	}
+
 	async delete(idColumn: number): Promise<void> {
 		await this.connection.query("delete from pedro.column where id_column = $1", [idColumn]);
 	}

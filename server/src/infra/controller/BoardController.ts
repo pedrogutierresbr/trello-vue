@@ -3,7 +3,6 @@ import CardService from "../../service/CardService";
 import ColumnService from "../../service/ColumnsService";
 import Connection from "../database/Connection";
 import Http from "../http/Http";
-import BoardRepositoryDatabase from "../repository/BoardRepositoryDatabase";
 import CardRepositoryDatabase from "../repository/CardRepositoryDatabase";
 import ColumnRepositoryDatabase from "../repository/ColumnRepositoryDatabase";
 import BoardRepository from "../../domain/repository/BoardRepository";
@@ -19,14 +18,12 @@ export default class BoardController {
 		readonly cardRepository: CardRepository
 	) {
 		http.route("get", "/boards", async function (params: any, body: any) {
-			const boardRepository = new BoardRepositoryDatabase(connection);
 			const boardService = new BoardService(boardRepository, columnRepository, cardRepository);
 			const boards = await boardService.getBoards();
 			return boards;
 		});
 
 		http.route("get", "/boards/:idBoard", async function (params: any, body: any) {
-			const boardRepository = new BoardRepositoryDatabase(connection);
 			const boardService = new BoardService(boardRepository, columnRepository, cardRepository);
 			const boards = await boardService.getBoard(params.idBoard);
 			return boards;
@@ -53,6 +50,19 @@ export default class BoardController {
 			return idColumn;
 		});
 
+		http.route("post", "/boards/:idBoard/columns/:idColumn/cards", async function (params: any, body: any) {
+			const cardRepository = new CardRepositoryDatabase(connection);
+			const cardService = new CardService(cardRepository);
+			const idCard = await cardService.saveCard(body);
+			return idCard;
+		});
+
+		http.route("put", "/boards/:idBoard/columns/:idColumn/cards/:idCard", async function (params: any, body: any) {
+			const cardRepository = new CardRepositoryDatabase(connection);
+			const cardService = new CardService(cardRepository);
+			await cardService.updateCard(body);
+		});
+
 		http.route("delete", "/boards/:idBoard/columns/:idColumn", async function (params: any, body: any) {
 			const columnRepository = new ColumnRepositoryDatabase(connection);
 			const columnService = new ColumnService(columnRepository);
@@ -64,6 +74,12 @@ export default class BoardController {
 			const cardService = new CardService(cardRepository);
 			const cards = await cardService.getCards(parseInt(params.idColumn));
 			return cards;
+		});
+
+		http.route("delete", "/boards/:idBoard/columns/:idColumn/cards/:idCard", async function (params: any, body: any) {
+			const cardRepository = new CardRepositoryDatabase(connection);
+			const cardService = new CardService(cardRepository);
+			await cardService.deleteCard(parseInt(params.idCard));
 		});
 	}
 }
