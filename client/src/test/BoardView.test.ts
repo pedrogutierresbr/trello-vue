@@ -1,6 +1,7 @@
 import { mount } from "@vue/test-utils";
 import Board from "../entities/Board";
 import BoardService, { SaveColumnInput } from "../services/BoardService";
+// import BoardServiceHttp from "../services/BoardServiceHttp";
 import BoardViewVue from "../views/BoardView.vue";
 
 function sleep(ms: number) {
@@ -23,6 +24,7 @@ test("Deve testar o board view", async function () {
 			board.addCard("Todo", "Atividade 3", 1);
 			return board;
 		},
+		// const boardService = new BoardServiceHttp();
 		saveColumn: function (column: SaveColumnInput): Promise<number> {
 			return 1;
 		}
