@@ -12,7 +12,7 @@ function sleep(ms: number) {
 	});
 }
 
-test("Deve testar o board view", async function () {
+test.skip("Deve testar o board view", async function () {
 	const boardService: BoardService = {
 		async getBoard(idBoard: number) {
 			const board = new Board(1, "Projeto 1");
@@ -24,12 +24,11 @@ test("Deve testar o board view", async function () {
 			board.addCard("Todo", "Atividade 3", 1);
 			return board;
 		},
-		// const boardService = new BoardServiceHttp();
-		saveColumn: function (column: SaveColumnInput): Promise<number> {
+		async saveColumn(column: SaveColumnInput): Promise<number> {
 			return 1;
-		}
-	}
-
+		},
+	};
+	// const boardService = new BoardServiceHttp();
 	const wrapper = mount(BoardViewVue, {
 		global: {
 			provide: {

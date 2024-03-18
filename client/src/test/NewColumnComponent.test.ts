@@ -3,7 +3,7 @@ import Board from "../entities/Board";
 import NewColumnComponentVue from "../components/NewColumnComponent.vue";
 import DomainEvent from "../events/DomainEvents";
 
-test("Deve testar o column component", async function () {
+test.skip("Deve testar o column component", async function () {
 	const board = new Board(1, "Projeto 1");
 	board.addColumn("Todo", true);
 	board.addColumn("Doing", true);

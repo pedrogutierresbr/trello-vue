@@ -1,13 +1,13 @@
 <script setup lang="ts">
-	// import { useAuthStore } from '../stores/AuthStore';
+	import { useAuthStore } from "../stores/AuthStore";
 
-	// const authStore = useAuthStore();
+	const authStore = useAuthStore();
 </script>
 
 <template>
 	<div class="nav">
-		<!-- {{ authStore.session.token }}
-		<button @click="authStore.logout()">Logout</button> -->
+		{{ authStore.session.token }}
+		<button @click="authStore.logout()">Logout</button>
 	</div>
 </template>
 
